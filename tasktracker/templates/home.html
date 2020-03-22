@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+{% block content %}
+	<div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
+    	<img class="mr-3" src="{{url_for('static',filename='images/admin.svg')}}" alt="" width="48" height="48">
+    	<div class="lh-100">
+      		<h6 class="mb-0 text-white lh-100">Welcome {{current_user.username}}</h6>
+      		<small class="text-warning" id='greeting'></small>
+      		<script type="text/javascript">
+      			var myDate = new Date();
+      			var hrs = myDate.getHours();
+      			var greet;
+
+      			if (hrs < 12)
+      				greet = 'Good Morning';
+      			else if (hrs >= 12 && hrs <= 17)
+      				greet = 'Good Afternoon';
+      			else if (hrs >= 17 && hrs <= 24)
+      				greet = 'Good Evening';
+
+      			document.getElementById('greeting').innerHTML = greet;
+
+      		</script>
+    	</div>
+  </div>
+ <!--Project Manager-->
+ <div class="alert alert-info bs-callout" role="alert">
+  Project Managers <span class="badge badge-primary pl-2 ml-3">Total Count : {{pmcount}}</span>
+  <a class="btn btn-secondary btn-sm float-right  ml-2 " href="#" role="button">View</a>
+  <a class="btn btn-secondary btn-sm float-right  ml-2 " href="{{url_for('addpm')}}" role="button">Add</a>
+</div>
+
+<!--Subordinates-->
+ <div class="alert alert-info bs-callout" role="alert">
+  Subordinates <span class="badge badge-primary pl-2 ml-5">Total Count : {{subcount}}</span>
+  <a class="btn btn-secondary btn-sm float-right  ml-2 " href="#" role="button">View</a>
+  <a class="btn btn-secondary btn-sm float-right  ml-2 " href="#" role="button">Add</a>
+</div>
+{% endblock content %}

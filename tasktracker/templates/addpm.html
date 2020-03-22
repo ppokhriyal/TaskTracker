@@ -1,0 +1,77 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
+    	<img class="mr-3" src="{{url_for('static',filename='images/admin.svg')}}" alt="" width="48" height="48">
+    	<div class="lh-100">
+      		<h6 class="mb-0 text-white lh-100">Welcome {{current_user.username}}</h6>
+      		<small class="text-warning" id='greeting'></small>
+      		<script type="text/javascript">
+      			var myDate = new Date();
+      			var hrs = myDate.getHours();
+      			var greet;
+
+      			if (hrs < 12)
+      				greet = 'Good Morning';
+      			else if (hrs >= 12 && hrs <= 17)
+      				greet = 'Good Afternoon';
+      			else if (hrs >= 17 && hrs <= 24)
+      				greet = 'Good Evening';
+
+      			document.getElementById('greeting').innerHTML = greet;
+
+      		</script>
+    	</div>
+  </div>
+  <h5>Add New Project Manager</h5>
+  <div class="border-bottom mt-1"></div>
+  <form class="pt-2" method="POST" action="">
+  	{{form.hidden_tag()}}
+  	<div class="form-group">
+    	<label>Project Manager</label>
+    	{% if form.username.errors %}
+    		{{ form.usernameusername(class="form-control is-invalid")}}
+    			<div class="invalid-feedback">
+    				{% for error in form.username.errors %}
+    					<span>{{ error }}</span>
+    				{% endfor %}
+    			</div>
+    	{% else %}
+    		{{ form.username(class="form-control",placeholder="Username")}}
+    	{% endif %}
+  </div>
+  	<div class="form-group">
+    	<label>Email address</label>
+    	{% if form.email.errors %}
+    		{{ form.email(class="form-control is-invalid")}}
+    			<div class="invalid-feedback">
+    				{% for error in form.email.errors %}
+    					<span>{{ error }}</span>
+    				{% endfor %}
+    			</div>
+    	{% else %}
+    		{{ form.email(class="form-control",placeholder="Enter email @vxlsoftware.com")}}
+    	{% endif %}
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    {% if form.password.errors %}
+    	{{ form.password(class="form-control is-invalid")}}
+    	<div class="invalid-feedback">
+    		{% for error in form.password.errors %}
+    			<span>{{ error }}</span>
+    		{% endfor %}
+    	</div>
+    {% else %}
+    	{{ form.password(class="form-control",placeholder="Password")}}	
+    {% endif %}
+  </div>
+  <div class="form-group">
+  				<label>Group</label>
+  				{{form.group(class="form-control")}}
+  			</div>
+  <div class="form-group">
+  	{{ form.submit(class="btn btn-sm btn-primary")}}
+  	 <a class="btn btn-warning btn-sm" href="{{url_for('home')}}">Cancel</a>
+  </div>
+</form>	
+{% endblock content %}
